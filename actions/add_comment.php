@@ -18,14 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post = Post::getById($postId);
     if (!$post) {
         setFlashMessage('Post introuvable', 'error');
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     }
     
     // Validation
     if (empty($content)) {
         setFlashMessage('Le contenu du commentaire est requis', 'error');
-        header('Location: post.php?id=' . $postId);
+        header('Location: ../post.php?id=' . $postId);
         exit;
     }
     
@@ -37,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         setFlashMessage('Erreur lors de l\'ajout du commentaire', 'error');
     }
     
-    header('Location: post.php?id=' . $postId);
+    header('Location: ../post.php?id=' . $postId);
     exit;
 } else {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 

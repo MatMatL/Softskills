@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier que le post existe et que l'utilisateur en est l'auteur
     if (!isPostAuthor($postId)) {
         setFlashMessage('Vous n\'avez pas le droit de supprimer ce post', 'error');
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     }
     
@@ -27,10 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         setFlashMessage('Erreur lors de la suppression du post', 'error');
     }
     
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 } else {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 

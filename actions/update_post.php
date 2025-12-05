@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier que le post existe et que l'utilisateur en est l'auteur
     if (!isPostAuthor($postId)) {
         setFlashMessage('Vous n\'avez pas le droit de modifier ce post', 'error');
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     }
     
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($success) {
             setFlashMessage('Post modifié avec succès !', 'success');
-            header('Location: post.php?id=' . $postId);
+            header('Location: ../post.php?id=' . $postId);
             exit;
         } else {
             $errors[] = 'Erreur lors de la modification du post';
@@ -61,11 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si erreurs, les stocker en session pour les afficher
     if (!empty($errors)) {
         setFlashMessage(implode('<br>', $errors), 'error');
-        header('Location: edit_post.php?id=' . $postId);
+        header('Location: ../edit_post.php?id=' . $postId);
         exit;
     }
 } else {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 

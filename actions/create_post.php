@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($postId) {
             setFlashMessage('Post créé avec succès !', 'success');
-            header('Location: post.php?id=' . $postId);
+            header('Location: ../post.php?id=' . $postId);
             exit;
         } else {
             $errors[] = 'Erreur lors de la création du post';
@@ -53,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si erreurs, les stocker en session pour les afficher
     if (!empty($errors)) {
         setFlashMessage(implode('<br>', $errors), 'error');
-        header('Location: create_post.php');
+        header('Location: ../create_post.php');
         exit;
     }
 } else {
-    header('Location: create_post.php');
+    header('Location: ../create_post.php');
     exit;
 }
 

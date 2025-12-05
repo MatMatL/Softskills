@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comment = Comment::getById($commentId);
     if (!$comment) {
         setFlashMessage('Commentaire introuvable', 'error');
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     }
     
     if (!isCommentAuthor($commentId)) {
         setFlashMessage('Vous n\'avez pas le droit de supprimer ce commentaire', 'error');
-        header('Location: post.php?id=' . $comment['post_id']);
+        header('Location: ../post.php?id=' . $comment['post_id']);
         exit;
     }
     
@@ -35,10 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         setFlashMessage('Erreur lors de la suppression du commentaire', 'error');
     }
     
-    header('Location: post.php?id=' . $postId);
+    header('Location: ../post.php?id=' . $postId);
     exit;
 } else {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 
