@@ -2,8 +2,52 @@
  * JavaScript principal pour l'application
  */
 
-// Gestion des likes avec AJAX
+// Gestion de la sidebar mobile
 document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    // Toggle sidebar
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+    
+    // Fermer la sidebar en cliquant sur l'overlay
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Fermer la sidebar en cliquant sur un lien (mobile)
+    const navLinks = document.querySelectorAll('.nav-item');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+    
+    // Fermer la sidebar lors du redimensionnement de la fenêtre
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1024) {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Gestion des likes avec AJAX
     // Gérer les formulaires de like
     const likeForms = document.querySelectorAll('.like-form');
     

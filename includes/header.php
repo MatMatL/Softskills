@@ -16,30 +16,84 @@ if (!function_exists('isLoggedIn')) {
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="container">
-                <a href="index.php" class="logo">Aide aux Devoirs</a>
-                <div class="nav-links">
-                    <a href="index.php">Accueil</a>
-                    <?php if (isLoggedIn()): ?>
-                        <a href="create_post.php">Nouveau post</a>
-                        <?php $currentUser = getCurrentUser(); ?>
-                        <a href="profile.php"><?php echo escape($currentUser['pseudo']); ?></a>
-                        <a href="logout.php">Déconnexion</a>
-                    <?php else: ?>
-                        <a href="login.php">Connexion</a>
-                        <a href="register.php">Inscription</a>
-                    <?php endif; ?>
-                </div>
-            </div>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.php" class="sidebar-logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Aide aux Devoirs</span>
+            </a>
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li>
+                    <a href="index.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Accueil</span>
+                    </a>
+                </li>
+                
+                <?php if (isLoggedIn()): ?>
+                    <?php $currentUser = getCurrentUser(); ?>
+                    <li>
+                        <a href="create_post.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'create_post.php' ? 'active' : ''; ?>">
+                            <span class="nav-icon">✍️</span>
+                            <span class="nav-text">Nouveau post</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active' : ''; ?>">
+                            <span class="nav-icon">👤</span>
+                            <span class="nav-text">Mon profil</span>
+                        </a>
+                    </li>
+                    <li class="nav-divider"></li>
+                    <li>
+                        <a href="profile.php" class="nav-item nav-user">
+                            <span class="nav-icon">👋</span>
+                            <span class="nav-text"><?php echo escape($currentUser['pseudo']); ?></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="logout.php" class="nav-item nav-logout">
+                            <span class="nav-icon">🚪</span>
+                            <span class="nav-text">Déconnexion</span>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a href="login.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'login.php' ? 'active' : ''; ?>">
+                            <span class="nav-icon">🔑</span>
+                            <span class="nav-text">Connexion</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="register.php" class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'register.php' ? 'active' : ''; ?>">
+                            <span class="nav-icon">📝</span>
+                            <span class="nav-text">Inscription</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
         </nav>
-    </header>
-    <main class="container">
-        <?php
-        $flash = getFlashMessage();
-        if ($flash) {
-            echo $flash;
-        }
-        ?>
+    </aside>
+    
+    <!-- Overlay pour mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Contenu principal -->
+    <div class="main-wrapper">
+        <main class="main-content">
+            <?php
+            $flash = getFlashMessage();
+            if ($flash) {
+                echo $flash;
+            }
+            ?>
 
