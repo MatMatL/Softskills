@@ -16,6 +16,13 @@ if (!function_exists('isLoggedIn')) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Charger le thème immédiatement pour éviter le flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -83,6 +90,15 @@ if (!function_exists('isLoggedIn')) {
                         </a>
                     </li>
                 <?php endif; ?>
+                
+                <!-- Dark Mode Toggle -->
+                <li class="nav-divider"></li>
+                <li>
+                    <button class="nav-item nav-dark-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                        <span class="nav-icon" id="darkModeIcon">🌙</span>
+                        <span class="nav-text">Mode sombre</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </aside>

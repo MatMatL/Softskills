@@ -47,6 +47,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Gestion du Dark Mode
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const html = document.documentElement;
+    
+    // Fonction pour mettre à jour l'icône
+    function updateDarkModeIcon() {
+        const currentTheme = html.getAttribute('data-theme');
+        if (darkModeIcon) {
+            darkModeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+    
+    // Initialiser l'icône au chargement
+    updateDarkModeIcon();
+    
+    // Toggle dark mode
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Mettre à jour l'icône
+            updateDarkModeIcon();
+        });
+    }
+    
     // Gestion des likes avec AJAX
     // Gérer les formulaires de like
     const likeForms = document.querySelectorAll('.like-form');
